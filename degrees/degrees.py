@@ -101,7 +101,6 @@ def shortest_path(source, target):
     while True:
         if frontier.empty():
             print("no solution")
-            # raise Exception("no solution")
             return None
         
         node = frontier.remove()
@@ -110,13 +109,16 @@ def shortest_path(source, target):
         if node.state == target:
             actions = []
             d = []
+            output = []
             while node.parent is not None:
                 actions.append(node.action)
                 d.append(node.state)
                 node = node.parent
             actions.reverse()
             d.reverse()
-            return list(zip(actions, state))
+            for action, state in zip(actions, d):
+                output.append((action, state))
+            return output
         
         explored.add(node.state)
 
